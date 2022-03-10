@@ -8,6 +8,7 @@ const app = express();
 
 // GET /api/images endpoint
 app.get("/api/images", (req: express.Request, res: express.Response) => {
+    
     // Get the variables value from the query parameters.
     const filename = req.query.filename as string;
     const width = +(req.query.width as string);
@@ -19,25 +20,13 @@ app.get("/api/images", (req: express.Request, res: express.Response) => {
         return;
     }
 
-    // // Validate Dimensions
-    // if (isNaN(width) || width <= 0 || isNaN(height) || height <= 0) {
-    //     res.send("INFO: Dimensions must be a positive number!");
-    //     return;
-    // }
-
-    // Validate filename
-    // if (!checkFileInFolder('./assets/full/', filename)) {
-    //     res.send("INFO: File should be placed in /images folder!");
-    //     return;
-    // }
-
     // Validate Dimensions
     if (isNaN(width) || width <= 0 || isNaN(height) || height <= 0) {
         res.send("INFO: Dimensions must be a positive number!");
         return;
     }
 
-
+    // Check the avaliability of the required image and send it.
     checkFileInFolderAsync('./assets/thumb/', `${filename}_${width}_${height}`)
         .then((result) => {
             {
