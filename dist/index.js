@@ -19,18 +19,40 @@ app.get("/api/images", (req, res) => {
         res.send("INFO: File should be placed in /images folder!");
         return;
     }
+    // // Validate Dimensions
+    // if (isNaN(width) || width <= 0 || isNaN(height) || height <= 0) {
+    //     res.send("INFO: Dimensions must be a positive number!");
+    //     return;
+    // }
+    // Validate filename
+    // if (!checkFileInFolder('./assets/full/', filename)) {
+    //     res.send("INFO: File should be placed in /images folder!");
+    //     return;
+    // }
     // Validate Dimensions
     if (isNaN(width) || width <= 0 || isNaN(height) || height <= 0) {
         res.send("INFO: Dimensions must be a positive number!");
         return;
     }
-    // Respond with resized image
-    (0, sharp_resize_1.default)(filename, width, height)
-        .then((thumbFilename) => {
-        const filePath = path_1.default.join(__dirname, "..", "/assets/thumb", thumbFilename);
-        res.sendFile(filePath);
-    })
-        .catch((error) => {
+    (0, utils_1.checkFileInFolderAsync)('./assets/thumb/', `${filename}_${width}_${height}`)
+        .then((result) => {
+        {
+            // Check if the image is already processed
+            if (result) {
+                // Respond with the exist image without reprocessing
+                const thumbFilePath = path_1.default.join(__dirname, "..", "/assets/thumb", `${filename}_${width}_${height}.jpg`);
+                res.sendFile(thumbFilePath);
+            }
+            else {
+                // Process and respond with the resized image
+                (0, sharp_resize_1.default)(filename, width, height)
+                    .then((thumbFilename) => {
+                    const filePath = path_1.default.join(__dirname, "..", "/assets/thumb", thumbFilename);
+                    res.sendFile(filePath);
+                });
+            }
+        }
+    }).catch((error) => {
         console.log(error);
     });
 });

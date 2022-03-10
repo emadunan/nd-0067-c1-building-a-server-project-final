@@ -24,9 +24,9 @@ const resizeImg = (filename, width, height) => __awaiter(void 0, void 0, void 0,
             width: width,
             height: height,
         })
-            .toFile("./assets/thumb/" + filename + "_thumb.jpg")
+            .toFile("./assets/thumb/" + filename + "_" + width + "_" + height + ".jpg")
             .then(() => {
-            thumb_filename = filename + "_thumb.jpg";
+            thumb_filename = filename + "_" + width + "_" + height + ".jpg";
         });
     }
     catch (error) {

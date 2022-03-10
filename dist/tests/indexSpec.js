@@ -28,9 +28,17 @@ describe("API Endpoints tests:", () => {
             const result = yield (0, sharp_resize_1.default)("santamonica", 300, 300);
             expect(() => result).not.toThrowError();
         }));
-        it("Expect to return santamonica_thumb.jpg", () => __awaiter(void 0, void 0, void 0, function* () {
+        it("Expect to return santamonica_300_300.jpg", () => __awaiter(void 0, void 0, void 0, function* () {
             const result = yield (0, sharp_resize_1.default)("santamonica", 300, 300);
-            expect(result).toEqual("santamonica_thumb.jpg");
+            expect(result).toEqual("santamonica_300_300.jpg");
+        }));
+        it("Expect to return santamonica_200_250.jpg", () => __awaiter(void 0, void 0, void 0, function* () {
+            const result = yield (0, sharp_resize_1.default)("santamonica", 200, 250);
+            expect(result).toEqual("santamonica_200_250.jpg");
+        }));
+        it("Expect to return santamonica_400_300.jpg", () => __awaiter(void 0, void 0, void 0, function* () {
+            const result = yield (0, sharp_resize_1.default)("santamonica", 400, 300);
+            expect(result).toEqual("santamonica_400_300.jpg");
         }));
     });
 });

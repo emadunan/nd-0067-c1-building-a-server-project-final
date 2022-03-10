@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 
 import resizeImg from "./utilities/sharp-resize";
-import { imgFileNames } from "./utilities/utils";
+import { checkFileInFolderAsync, imgFileNames } from "./utilities/utils";
 
 const app = express();
 
@@ -19,24 +19,43 @@ app.get("/api/images", (req: express.Request, res: express.Response) => {
         return;
     }
 
+    // // Validate Dimensions
+    // if (isNaN(width) || width <= 0 || isNaN(height) || height <= 0) {
+    //     res.send("INFO: Dimensions must be a positive number!");
+    //     return;
+    // }
+
+    // Validate filename
+    // if (!checkFileInFolder('./assets/full/', filename)) {
+    //     res.send("INFO: File should be placed in /images folder!");
+    //     return;
+    // }
+
     // Validate Dimensions
     if (isNaN(width) || width <= 0 || isNaN(height) || height <= 0) {
         res.send("INFO: Dimensions must be a positive number!");
         return;
     }
 
-    // Respond with resized image
-    resizeImg(filename, width, height)
-        .then((thumbFilename) => {
-            const filePath = path.join(
-                __dirname,
-                "..",
-                "/assets/thumb",
-                thumbFilename
-            );
-            res.sendFile(filePath);
-        })
-        .catch((error) => {
+
+    checkFileInFolderAsync('./assets/thumb/', `${filename}_${width}_${height}`)
+        .then((result) => {
+            {
+                // Check if the image is already processed
+                if (result) {
+                    // Respond with the exist image without reprocessing
+                    const thumbFilePath = path.join(__dirname, "..", "/assets/thumb", `${filename}_${width}_${height}.jpg`);
+                    res.sendFile(thumbFilePath);
+                } else {
+                    // Process and respond with the resized image
+                    resizeImg(filename, width, height)
+                        .then((thumbFilename) => {
+                            const filePath = path.join(__dirname, "..", "/assets/thumb", thumbFilename);
+                            res.sendFile(filePath);
+                        })
+                }
+            }
+        }).catch((error) => {
             console.log(error);
         });
 });

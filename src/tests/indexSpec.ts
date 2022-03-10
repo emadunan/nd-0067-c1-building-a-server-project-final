@@ -18,9 +18,19 @@ describe("API Endpoints tests:", () => {
             expect(() => result).not.toThrowError();
         });
 
-        it("Expect to return santamonica_thumb.jpg", async () => {
+        it("Expect to return santamonica_300_300.jpg", async () => {
             const result = await resizeImg("santamonica", 300, 300);
-            expect(result).toEqual("santamonica_thumb.jpg");
+            expect(result).toEqual("santamonica_300_300.jpg");
+        });
+
+        it("Expect to return santamonica_200_250.jpg", async () => {
+            const result = await resizeImg("santamonica", 200, 250);
+            expect(result).toEqual("santamonica_200_250.jpg");
+        });
+
+        it("Expect to return santamonica_400_300.jpg", async () => {
+            const result = await resizeImg("santamonica", 400, 300);
+            expect(result).toEqual("santamonica_400_300.jpg");
         });
     });
 });
