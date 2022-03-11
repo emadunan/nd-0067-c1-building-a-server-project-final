@@ -28,7 +28,7 @@ const fs_1 = __importStar(require("fs"));
 // Get available images filename
 const imagesFolder = "./assets/full/";
 const imgFilesArray = [];
-fs_1.default.readdir(imagesFolder, (err, files) => {
+fs_1.default.readdir(imagesFolder, (_err, files) => {
     files.forEach((file) => {
         const filename = file.split(".")[0];
         imgFilesArray.push(filename);

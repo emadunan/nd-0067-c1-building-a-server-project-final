@@ -6,10 +6,10 @@ const resizeImg = async (
     width: number,
     height: number
 ): Promise<string> => {
-    let thumb_filename = "";
+    let thumb_filename: string = "";
 
     try {
-        const imgRelPath = "./assets/full/" + filename + ".jpg";
+        const imgRelPath: string = "./assets/full/" + filename + ".jpg";
         await sharp(imgRelPath)
             .resize({
                 width: width,
@@ -24,11 +24,11 @@ const resizeImg = async (
                     height +
                     ".jpg"
             )
-            .then(() => {
+            .then((): void => {
                 thumb_filename = filename + "_" + width + "_" + height + ".jpg";
             });
     } catch (error) {
-        console.log(error);
+        throw new Error("ERROR: Image hasn't been resized!");
     }
 
     return thumb_filename;

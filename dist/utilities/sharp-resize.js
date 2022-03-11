@@ -35,7 +35,7 @@ const resizeImg = (filename, width, height) => __awaiter(void 0, void 0, void 0,
         });
     }
     catch (error) {
-        console.log(error);
+        throw new Error("ERROR: Image hasn't been resized!");
     }
     return thumb_filename;
 });

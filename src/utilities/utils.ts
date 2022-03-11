@@ -1,18 +1,18 @@
 import fs, { promises as fsPromises } from "fs";
 
 // Get available images filename
-const imagesFolder = "./assets/full/";
+const imagesFolder: string = "./assets/full/";
 const imgFilesArray: string[] = [];
 
-fs.readdir(imagesFolder, (err, files) => {
-    files.forEach((file) => {
-        const filename = file.split(".")[0];
+fs.readdir(imagesFolder, (_err: NodeJS.ErrnoException|null, files: string[]): void => {
+    files.forEach((file: string): void => {
+        const filename: string = file.split(".")[0];
         imgFilesArray.push(filename);
     });
 });
 
 // Export array of the assets/full/ folder filenames
-export const imgFileNames = imgFilesArray;
+export const imgFileNames: string[] = imgFilesArray;
 
 // Check file existance in a specific path
 export const checkFileInFolderAsync = (
@@ -23,13 +23,13 @@ export const checkFileInFolderAsync = (
 
     return fsPromises
         .readdir(folderPath)
-        .then((files) => {
-            files.forEach((file) => {
-                const filename = file.split(".")[0];
+        .then((files: string[]): void => {
+            files.forEach((file: string): void => {
+                const filename: string = file.split(".")[0];
                 imgFiles.push(filename);
             });
         })
-        .then(() => {
+        .then((): boolean => {
             return imgFiles.includes(filename);
         });
 };
