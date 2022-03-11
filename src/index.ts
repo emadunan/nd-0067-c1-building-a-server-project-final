@@ -8,7 +8,6 @@ const app = express();
 
 // GET /api/images endpoint
 app.get("/api/images", (req: express.Request, res: express.Response) => {
-    
     // Get the variables value from the query parameters.
     const filename = req.query.filename as string;
     const width = +(req.query.width as string);
@@ -27,24 +26,34 @@ app.get("/api/images", (req: express.Request, res: express.Response) => {
     }
 
     // Check the avaliability of the required image and send it.
-    checkFileInFolderAsync('./assets/thumb/', `${filename}_${width}_${height}`)
+    checkFileInFolderAsync("./assets/thumb/", `${filename}_${width}_${height}`)
         .then((result) => {
             {
                 // Check if the image is already processed
                 if (result) {
                     // Respond with the exist image without reprocessing
-                    const thumbFilePath = path.join(__dirname, "..", "/assets/thumb", `${filename}_${width}_${height}.jpg`);
+                    const thumbFilePath = path.join(
+                        __dirname,
+                        "..",
+                        "/assets/thumb",
+                        `${filename}_${width}_${height}.jpg`
+                    );
                     res.sendFile(thumbFilePath);
                 } else {
                     // Process and respond with the resized image
-                    resizeImg(filename, width, height)
-                        .then((thumbFilename) => {
-                            const filePath = path.join(__dirname, "..", "/assets/thumb", thumbFilename);
-                            res.sendFile(filePath);
-                        })
+                    resizeImg(filename, width, height).then((thumbFilename) => {
+                        const filePath = path.join(
+                            __dirname,
+                            "..",
+                            "/assets/thumb",
+                            thumbFilename
+                        );
+                        res.sendFile(filePath);
+                    });
                 }
             }
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.log(error);
         });
 });

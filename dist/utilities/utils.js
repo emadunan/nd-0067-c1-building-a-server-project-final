@@ -39,8 +39,9 @@ exports.imgFileNames = imgFilesArray;
 // Check file existance in a specific path
 const checkFileInFolderAsync = (folderPath, filename) => {
     const imgFiles = [];
-    return fs_1.promises.readdir(folderPath)
-        .then(files => {
+    return fs_1.promises
+        .readdir(folderPath)
+        .then((files) => {
         files.forEach((file) => {
             const filename = file.split(".")[0];
             imgFiles.push(filename);

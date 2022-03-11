@@ -15,11 +15,15 @@ fs.readdir(imagesFolder, (err, files) => {
 export const imgFileNames = imgFilesArray;
 
 // Check file existance in a specific path
-export const checkFileInFolderAsync = (folderPath: string, filename: string): Promise<boolean> => {
+export const checkFileInFolderAsync = (
+    folderPath: string,
+    filename: string
+): Promise<boolean> => {
     const imgFiles: string[] = [];
 
-    return fsPromises.readdir(folderPath)
-        .then(files => {
+    return fsPromises
+        .readdir(folderPath)
+        .then((files) => {
             files.forEach((file) => {
                 const filename = file.split(".")[0];
                 imgFiles.push(filename);
@@ -27,6 +31,5 @@ export const checkFileInFolderAsync = (folderPath: string, filename: string): Pr
         })
         .then(() => {
             return imgFiles.includes(filename);
-        })
-}
-
+        });
+};

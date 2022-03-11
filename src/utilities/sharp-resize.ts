@@ -10,13 +10,20 @@ const resizeImg = async (
 
     try {
         const imgRelPath = "./assets/full/" + filename + ".jpg";
-        console.log(imgRelPath);
         await sharp(imgRelPath)
             .resize({
                 width: width,
                 height: height,
             })
-            .toFile("./assets/thumb/" + filename + "_" + width + "_" + height + ".jpg")
+            .toFile(
+                "./assets/thumb/" +
+                    filename +
+                    "_" +
+                    width +
+                    "_" +
+                    height +
+                    ".jpg"
+            )
             .then(() => {
                 thumb_filename = filename + "_" + width + "_" + height + ".jpg";
             });

@@ -18,13 +18,18 @@ const resizeImg = (filename, width, height) => __awaiter(void 0, void 0, void 0,
     let thumb_filename = "";
     try {
         const imgRelPath = "./assets/full/" + filename + ".jpg";
-        console.log(imgRelPath);
         yield (0, sharp_1.default)(imgRelPath)
             .resize({
             width: width,
             height: height,
         })
-            .toFile("./assets/thumb/" + filename + "_" + width + "_" + height + ".jpg")
+            .toFile("./assets/thumb/" +
+            filename +
+            "_" +
+            width +
+            "_" +
+            height +
+            ".jpg")
             .then(() => {
             thumb_filename = filename + "_" + width + "_" + height + ".jpg";
         });
