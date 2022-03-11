@@ -15,13 +15,13 @@ app.get("/api/images", (req: express.Request, res: express.Response) => {
 
     // Validate filename
     if (!imgFileNames.includes(filename)) {
-        res.send("INFO: File should be placed in /images folder!");
+        res.send("ERROR: File should be placed in /images folder!");
         return;
     }
 
     // Validate Dimensions
     if (isNaN(width) || width <= 0 || isNaN(height) || height <= 0) {
-        res.send("INFO: Dimensions must be a positive number!");
+        res.send("ERROR: Dimensions must be a positive number!");
         return;
     }
 
