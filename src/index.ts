@@ -73,8 +73,8 @@ app.get("/api/images", (req: exreq, res: exres): void => {
         });
 });
 
-app.listen(3000, (): void => {
-    console.log("Listening on port 3000 ...");
+app.listen(8001, (): void => {
+    console.log("Listening on port 8001 ...");
 });
 
 export default app;

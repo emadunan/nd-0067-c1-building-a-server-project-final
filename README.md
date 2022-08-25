@@ -84,9 +84,9 @@ To run tests, run the following command
 Put the image you want to scale in **assets/full** folder (*example: santamonica.jpg*); Identify the **Width** and **Height** (*example: 300px width, 300px height*) for your output image, modify the below ***url*** to include your parameters and make a GET request.
 
 ```javascript
-    http://localhost:3000/api/images?filename=<filename:string>&width=<width:number>&height=<height:number>
+    http://localhost:8001/api/images?filename=<filename:string>&width=<width:number>&height=<height:number>
 
-    http://localhost:3000/api/images?filename=santamonica&width=300&height=300
+    http://localhost:8001/api/images?filename=santamonica&width=300&height=300
 ```
 > The image you selected will be processed, scaled according to the given dimensions, and shown in the browser. Also, if you open **assets/thumb** folder, you will find all your processed images. 
 

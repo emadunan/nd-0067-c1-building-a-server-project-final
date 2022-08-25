@@ -58,7 +58,7 @@ app.get("/api/images", (req, res) => {
         res.send(error);
     });
 });
-app.listen(3000, () => {
-    console.log("Listening on port 3000 ...");
+app.listen(8001, () => {
+    console.log("Listening on port 8001 ...");
 });
 exports.default = app;
